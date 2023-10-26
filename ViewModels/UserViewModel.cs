@@ -45,17 +45,13 @@ namespace WpfAppProject.ViewModels
             UserList = list;
         }
 
-        public ObservableCollection<UserModel> AddUser(string firstName, string lastName)
+        public ObservableCollection<UserModel> AddUser(ObservableCollection<UserModel> userlist,string firstName, string lastName)
         {
-            List<UserModel> list = new List<UserModel>
-            {
-                new UserModel{ Id=Guid.NewGuid(), FirstName =firstName, LastName=lastName, FullName=firstName+" "+lastName }
-            };
-            foreach (var user in list)
-            {
-                UserList.Add(user);
-            }
-            return UserList;
+            UserModel user = new UserModel { Id = Guid.NewGuid(), FirstName = firstName, LastName = lastName, FullName = firstName + " " + lastName };
+
+            userlist.Add(user);
+      
+            return userlist;
 
         }
         public ObservableCollection<UserModel> RemoveUser(ObservableCollection<UserModel> userlist, Guid id, string firstName, string lastName)

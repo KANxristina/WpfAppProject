@@ -25,25 +25,30 @@ namespace WpfAppProject.Views
     {
         private UserViewModel userViewModel;
         private ObservableCollection<UserModel> userlist;
+        private ObservableCollection<UserModel> Userlist;
         public UserView()
         {
             InitializeComponent();
             userViewModel = new UserViewModel();
-            userlist=new ObservableCollection<UserModel>();
+            Userlist = userViewModel.UserList;
+            userlist = Userlist;
+            
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var newList = userViewModel.AddUser(txtFirstName.Text, txtLastName.Text);
+            UserViewModel userViewModel = new UserViewModel();           
+            var newList = userViewModel.AddUser(Userlist, txtFirstName.Text, txtLastName.Text);
             cbUsers.ItemsSource = null;
             cbUsers.ItemsSource = newList;
             userlist = newList;
+            Userlist = newList;
 
         }
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             UserViewModel userViewModel = new UserViewModel();
             UserModel user = (UserModel)cbUsers.SelectedItem;
-            
+            ObservableCollection<UserModel> userlist = (ObservableCollection<UserModel>)cbUsers.ItemsSource;
             var newList = userViewModel.RemoveUser(userlist,user.Id,txtFirstName.Text, txtLastName.Text);
             cbUsers.ItemsSource = null;
             cbUsers.ItemsSource = newList;
