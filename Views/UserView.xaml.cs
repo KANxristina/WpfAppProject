@@ -24,32 +24,36 @@ namespace WpfAppProject.Views
     public partial class UserView : UserControl
     {
         private UserViewModel userViewModel;
-        private ObservableCollection<UserModel> userlist;
         private ObservableCollection<UserModel> Userlist;
+
         public UserView()
         {
             InitializeComponent();
+            Userlist=new ObservableCollection<UserModel>();
             userViewModel = new UserViewModel();
             Userlist = userViewModel.UserList;
-            userlist = Userlist;
-            
         }
+       
         private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            UserViewModel userViewModel = new UserViewModel();           
+        { 
             var newList = userViewModel.AddUser(Userlist, txtFirstName.Text, txtLastName.Text);
             cbUsers.ItemsSource = null;
-            cbUsers.ItemsSource = newList;
-            userlist = newList;
-            Userlist = newList;
-
+            cbUsers.ItemsSource = newList;       
+            txtFirstName.Clear();
+            txtLastName.Clear();
         }
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            UserViewModel userViewModel = new UserViewModel();
             UserModel user = (UserModel)cbUsers.SelectedItem;
-            ObservableCollection<UserModel> userlist = (ObservableCollection<UserModel>)cbUsers.ItemsSource;
-            var newList = userViewModel.RemoveUser(userlist,user.Id,txtFirstName.Text, txtLastName.Text);
+            var newList = userViewModel.RemoveUser(Userlist,user.Id,user.FirstName, user.LastName);
+            cbUsers.ItemsSource = null;
+            cbUsers.ItemsSource = newList;   
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            UserModel user = (UserModel)cbUsers.SelectedItem;
+            var newList = userViewModel.UpdateUser(Userlist, user.Id, txtFirstName.Text, txtLastName.Text);
             cbUsers.ItemsSource = null;
             cbUsers.ItemsSource = newList;
         }

@@ -18,13 +18,8 @@ namespace WpfAppProject.ViewModels
         public UserViewModel()
         {
             InitializeList();
-         //   userList = UserList;
-          //  userList.CollectionChanged += UserList_CollectionChanged;
         }
-        //private void UserList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    OnPropertyChanged("UserList");
-        //}
+
         public ObservableCollection<UserModel> UserList
         {
             get { return userList; }
@@ -35,7 +30,6 @@ namespace WpfAppProject.ViewModels
             }
         }
 
-
         public void InitializeList()
         {
             ObservableCollection<UserModel> list = new ObservableCollection<UserModel>
@@ -45,20 +39,24 @@ namespace WpfAppProject.ViewModels
             UserList = list;
         }
 
-        public ObservableCollection<UserModel> AddUser(ObservableCollection<UserModel> userlist,string firstName, string lastName)
+        public ObservableCollection<UserModel> AddUser(ObservableCollection<UserModel> users,string firstName, string lastName)
         {
             UserModel user = new UserModel { Id = Guid.NewGuid(), FirstName = firstName, LastName = lastName, FullName = firstName + " " + lastName };
-
-            userlist.Add(user);
-      
-            return userlist;
-
+            users.Add(user);     
+            return users;
         }
-        public ObservableCollection<UserModel> RemoveUser(ObservableCollection<UserModel> userlist, Guid id, string firstName, string lastName)
-        {         
-            var userToRemove = userlist.Where(x=>x.Id==id && x.FirstName==firstName && x.LastName==lastName).FirstOrDefault();
-            userList.Remove(userToRemove);
-            return userList;
+        public ObservableCollection<UserModel> RemoveUser(ObservableCollection<UserModel> users, Guid id, string firstName, string lastName)
+        {
+            UserModel userToRemove =(UserModel)users.Where(x=>x.Id==id && x.FirstName==firstName && x.LastName==lastName).FirstOrDefault();
+            users.Remove(userToRemove);
+            return users; 
+        }
+        public ObservableCollection<UserModel> UpdateUser(ObservableCollection<UserModel> users, Guid id, string newFirstName, string newLastName)
+        {
+            UserModel userToUpdate = (UserModel)users.Where(x => x.Id ==id).FirstOrDefault();
+            userToUpdate.FirstName = newFirstName;
+            userToUpdate.LastName = newLastName;
+            return users;
         }
         protected void OnPropertyChanged(string propertyName)
         {

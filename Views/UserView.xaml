@@ -6,19 +6,20 @@
              xmlns:local="clr-namespace:WpfAppProject.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="0,-32,0,-38">
         <ComboBox Name="cbUsers"
           ItemsSource="{Binding  UserList, UpdateSourceTrigger=PropertyChanged}"
           DisplayMemberPath="FullName"
           SelectedValuePath="FirstName"
-          HorizontalAlignment="Left" Margin="162,65,0,0" VerticalAlignment="Top" Width="120" IsEditable="False" />
+          HorizontalAlignment="Left" Margin="280,138,0,0" VerticalAlignment="Top" Width="120" IsEditable="False" />
         <Button Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="123,288,0,0" VerticalAlignment="Top" Click="btnAdd_Click" />
         <Button Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="509,298,0,0" VerticalAlignment="Top" Click="btnRemove_Click"/>
-        <TextBox Text="{Binding SelectedItem.FirstName, ElementName=cbUsers}" Name="txtFirstName" HorizontalAlignment="Left" Margin="123,334,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/>
+        <!--TextBox Text="{Binding SelectedItem.FirstName, ElementName=cbUsers}" Name="txtFirstName" HorizontalAlignment="Left" Margin="123,334,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/-->
+        <TextBox Text="" Name="txtFirstName" HorizontalAlignment="Left" Margin="123,334,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/>
         <Label Content="FirstName" HorizontalAlignment="Left" Margin="42,325,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.25,-0.093"/>
-        <TextBox Text="{Binding Path=SelectedItem.LastName, ElementName=cbUsers}" Name="txtLastName"  HorizontalAlignment="Left" Margin="123,393,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/>
+        <!--TextBox Text="{Binding Path=SelectedItem.LastName, ElementName=cbUsers}" Name="txtLastName"  HorizontalAlignment="Left" Margin="123,393,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/-->
+        <TextBox Text="" Name="txtLastName"  HorizontalAlignment="Left" Margin="123,393,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="146"/>
         <Label Content="LastName" HorizontalAlignment="Left" Margin="42,380,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.25,-0.093"/>
-     
-
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="509,383,0,0" VerticalAlignment="Top" Click="btnUpdate_Click"/>
     </Grid>
 </UserControl>
